@@ -8,6 +8,8 @@ import '../../../movies/data/datasources/movies_remote_data_source.dart';
 import '../../../movies/data/repositories/movies_repository_impl.dart';
 import '../../../movies/domain/usecases/get_featured_movies_use_case.dart';
 import '../../../movies/domain/usecases/get_movies_by_genre_use_case.dart';
+import '../../../browse/presentation/bloc/browse_bloc.dart';
+import '../../../browse/presentation/views/browse_view.dart';
 import '../../../movies/presentation/bloc/home_movies_bloc.dart';
 import '../../../movies/presentation/bloc/home_movies_event.dart';
 import '../../../search/presentation/bloc/search_bloc.dart';
@@ -59,6 +61,9 @@ class MainLayoutView extends StatelessWidget {
         BlocProvider<SearchBloc>(
           create: (_) => SearchView.createSearchBloc(),
         ),
+        BlocProvider<BrowseBloc>(
+          create: (_) => BrowseView.createBrowseBloc(),
+        ),
       ],
       child: const _MainLayoutScaffold(),
     );
@@ -78,7 +83,7 @@ class _MainLayoutScaffoldState extends State<_MainLayoutScaffold> {
   final List<Widget> _views = const [
     HomeView(),
     SearchView(),
-    _PlaceholderView(title: 'Browse'),
+    BrowseView(),
     _PlaceholderView(title: 'Profile'),
   ];
 
