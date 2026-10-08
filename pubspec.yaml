@@ -13,10 +13,11 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # State Management
-  flutter_bloc: ^9.1.1
+  flutter_bloc: ^8.1.6
+  bloc: ^8.1.4
 
   # Networking & Parsing
-  dio: ^5.11.1
+  dio: ^5.7.0
   retrofit: ^4.9.0
   json_annotation: ^4.9.0
   logger: ^2.6.0
