@@ -14,4 +14,7 @@ abstract class AppAssets {
   static const String avatar3 = 'assets/images/avatar_3.png';
 
   static const String forgetPassword = 'assets/images/forget_password.png';
+
+  static const String availableNowText = 'assets/images/available_now.png';
+  static const String watchNowText = 'assets/images/watch_now.png';
 }

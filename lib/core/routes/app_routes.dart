@@ -10,6 +10,7 @@ import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/auth/presentation/views/forget_password_view.dart';
 import '../../features/auth/presentation/views/login_view.dart';
 import '../../features/auth/presentation/views/register_view.dart';
+import '../../features/home/presentation/views/main_layout_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/onboarding/presentation/views/splash_view.dart';
 
@@ -69,7 +70,10 @@ abstract class AppRoutes {
           ),
         );
       case home:
-        return _buildPlaceholderRoute('Home Screen', settings);
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const MainLayoutView(),
+        );
       default:
         return _buildPlaceholderRoute(
           'No route defined for ${settings.name}',
