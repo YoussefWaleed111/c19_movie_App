@@ -145,7 +145,7 @@ class _LoginViewState extends State<LoginView> {
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
-                    // Navigate to Forget Password
+                    Navigator.pushNamed(context, AppRoutes.resetPassword);
                   },
                   child: Text(
                     'Forget Password ?',

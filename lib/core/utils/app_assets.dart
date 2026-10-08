@@ -12,4 +12,6 @@ abstract class AppAssets {
   static const String avatar1 = 'assets/images/avatar_1.png';
   static const String avatar2 = 'assets/images/avatar_2.png';
   static const String avatar3 = 'assets/images/avatar_3.png';
+
+  static const String forgetPassword = 'assets/images/forget_password.png';
 }
