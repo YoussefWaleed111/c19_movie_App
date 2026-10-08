@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../features/auth/presentation/views/login_view.dart';
+import '../../features/auth/presentation/views/register_view.dart';
 import '../../features/onboarding/presentation/views/onboarding_view.dart';
 import '../../features/onboarding/presentation/views/splash_view.dart';
 
@@ -28,7 +29,10 @@ abstract class AppRoutes {
           builder: (_) => const LoginView(),
         );
       case register:
-        return _buildPlaceholderRoute('Register Screen', settings);
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const RegisterView(),
+        );
       case home:
         return _buildPlaceholderRoute('Home Screen', settings);
       default:

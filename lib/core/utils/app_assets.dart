@@ -8,4 +8,8 @@ abstract class AppAssets {
   static const String onboarding4 = 'assets/images/onboarding_4.jpg';
   static const String onboarding5 = 'assets/images/onboarding_5.jpg';
   static const String onboarding6 = 'assets/images/onboarding_6.jpg';
+
+  static const String avatar1 = 'assets/images/avatar_1.png';
+  static const String avatar2 = 'assets/images/avatar_2.png';
+  static const String avatar3 = 'assets/images/avatar_3.png';
 }
