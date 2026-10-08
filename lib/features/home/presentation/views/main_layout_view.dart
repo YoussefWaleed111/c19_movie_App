@@ -1,16 +1,69 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/api/api_service.dart';
 import '../../../../core/theme/app_theme.dart';
+import '../../../movies/data/datasources/movies_remote_data_source.dart';
+import '../../../movies/data/repositories/movies_repository_impl.dart';
+import '../../../movies/domain/usecases/get_featured_movies_use_case.dart';
+import '../../../movies/domain/usecases/get_movies_by_genre_use_case.dart';
+import '../../../movies/presentation/bloc/home_movies_bloc.dart';
+import '../../../movies/presentation/bloc/home_movies_event.dart';
 import 'home_view.dart';
 
-class MainLayoutView extends StatefulWidget {
+class MainLayoutView extends StatelessWidget {
   const MainLayoutView({super.key});
 
+  static HomeMoviesBloc createHomeMoviesBloc() {
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: 'https://yts.lt/api/v2/',
+        connectTimeout: const Duration(seconds: 25),
+        receiveTimeout: const Duration(seconds: 25),
+        headers: {
+          'Accept': 'application/json',
+        },
+      ),
+    )..interceptors.add(
+        LogInterceptor(
+          request: true,
+          requestHeader: false,
+          requestBody: false,
+          responseHeader: false,
+          responseBody: false,
+          error: true,
+        ),
+      );
+    final apiService = ApiService(dio);
+    final remoteDataSource =
+        MoviesRemoteDataSourceImpl(apiService: apiService);
+    final repository =
+        MoviesRepositoryImpl(remoteDataSource: remoteDataSource);
+
+    return HomeMoviesBloc(
+      getFeaturedMoviesUseCase: GetFeaturedMoviesUseCase(repository),
+      getMoviesByGenreUseCase: GetMoviesByGenreUseCase(repository),
+    )..add(FetchHomeMoviesEvent());
+  }
+
   @override
-  State<MainLayoutView> createState() => _MainLayoutViewState();
+  Widget build(BuildContext context) {
+    return BlocProvider<HomeMoviesBloc>(
+      create: (_) => createHomeMoviesBloc(),
+      child: const _MainLayoutScaffold(),
+    );
+  }
 }
 
-class _MainLayoutViewState extends State<MainLayoutView> {
+class _MainLayoutScaffold extends StatefulWidget {
+  const _MainLayoutScaffold();
+
+  @override
+  State<_MainLayoutScaffold> createState() => _MainLayoutScaffoldState();
+}
+
+class _MainLayoutScaffoldState extends State<_MainLayoutScaffold> {
   int _currentIndex = 0;
 
   final List<Widget> _views = const [

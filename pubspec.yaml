@@ -26,6 +26,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
+  shimmer: ^3.0.0
 
   # Firebase (Auth & Watchlist)
   firebase_core: ^3.6.0
