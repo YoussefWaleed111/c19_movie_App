@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:dio/dio.dart';
+import '../../domain/entities/movie_details_entity.dart';
 import '../../domain/entities/movie_entity.dart';
 import '../../domain/repositories/movies_repository.dart';
 import '../datasources/movies_remote_data_source.dart';
@@ -46,6 +47,48 @@ class MoviesRepositoryImpl implements MoviesRepository {
       throw _handleDioException(e);
     } catch (e, stackTrace) {
       print('🔴 [MoviesRepository] Unexpected error in getMoviesByGenre($genre): $e');
+      print('   ➜ StackTrace: $stackTrace');
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<MovieDetailsEntity> getMovieDetails(int movieId) async {
+    try {
+      final model = await remoteDataSource.getMovieDetails(movieId);
+      return model.toEntity();
+    } on DioException catch (e) {
+      print('🔴 [MoviesRepository] DioException in getMovieDetails($movieId):');
+      print('   ➜ URI: ${e.requestOptions.uri}');
+      print('   ➜ Type: ${e.type}');
+      print('   ➜ Status Code: ${e.response?.statusCode}');
+      print('   ➜ Response Body: ${e.response?.data}');
+      print('   ➜ Error: ${e.error}');
+      print('   ➜ Message: ${e.message}');
+      throw _handleDioException(e);
+    } catch (e, stackTrace) {
+      print('🔴 [MoviesRepository] Unexpected error in getMovieDetails($movieId): $e');
+      print('   ➜ StackTrace: $stackTrace');
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<List<MovieEntity>> getMovieSuggestions(int movieId) async {
+    try {
+      final models = await remoteDataSource.getMovieSuggestions(movieId);
+      return models.map((m) => m.toEntity()).toList();
+    } on DioException catch (e) {
+      print('🔴 [MoviesRepository] DioException in getMovieSuggestions($movieId):');
+      print('   ➜ URI: ${e.requestOptions.uri}');
+      print('   ➜ Type: ${e.type}');
+      print('   ➜ Status Code: ${e.response?.statusCode}');
+      print('   ➜ Response Body: ${e.response?.data}');
+      print('   ➜ Error: ${e.error}');
+      print('   ➜ Message: ${e.message}');
+      throw _handleDioException(e);
+    } catch (e, stackTrace) {
+      print('🔴 [MoviesRepository] Unexpected error in getMovieSuggestions($movieId): $e');
       print('   ➜ StackTrace: $stackTrace');
       throw Exception(e.toString());
     }

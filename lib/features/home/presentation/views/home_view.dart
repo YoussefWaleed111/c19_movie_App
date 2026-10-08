@@ -10,6 +10,7 @@ import '../../../movies/domain/entities/movie_entity.dart';
 import '../../../movies/presentation/bloc/home_movies_bloc.dart';
 import '../../../movies/presentation/bloc/home_movies_event.dart';
 import '../../../movies/presentation/bloc/home_movies_state.dart';
+import '../../../movies/presentation/views/movie_details_view.dart';
 import '../widgets/movie_poster_card.dart';
 
 class HomeView extends StatefulWidget {
@@ -143,7 +144,15 @@ class _HomeViewState extends State<HomeView> {
                                   rating: movie.rating,
                                   width: double.infinity,
                                   height: double.infinity,
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            MovieDetailsView.create(movie.id),
+                                      ),
+                                    );
+                                  },
                                 ),
                               );
                             },
@@ -223,7 +232,15 @@ class _HomeViewState extends State<HomeView> {
                                   rating: movie.rating,
                                   width: 130.w,
                                   height: 195.h,
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            MovieDetailsView.create(movie.id),
+                                      ),
+                                    );
+                                  },
                                 );
                               },
                             ),
