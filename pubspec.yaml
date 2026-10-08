@@ -15,6 +15,7 @@ dependencies:
   # State Management
   flutter_bloc: ^8.1.6
   bloc: ^8.1.4
+  rxdart: ^0.28.0
 
   # Networking & Parsing
   dio: ^5.7.0

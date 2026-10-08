@@ -8,6 +8,7 @@ abstract class MoviesRemoteDataSource {
   Future<List<MovieModel>> getMoviesByGenre(String genre);
   Future<MovieDetailsModel> getMovieDetails(int movieId);
   Future<List<MovieModel>> getMovieSuggestions(int movieId);
+  Future<List<MovieModel>> searchMovies(String query);
 }
 
 class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
@@ -59,6 +60,17 @@ class MoviesRemoteDataSourceImpl implements MoviesRemoteDataSource {
       return response.data?.movies ?? [];
     } catch (e) {
       print('❌ [MoviesRemoteDataSource] getMovieSuggestions($movieId) error: $e');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<MovieModel>> searchMovies(String query) async {
+    try {
+      final response = await apiService.searchMovies(query);
+      return response.data?.movies ?? [];
+    } catch (e) {
+      print('❌ [MoviesRemoteDataSource] searchMovies("$query") error: $e');
       rethrow;
     }
   }

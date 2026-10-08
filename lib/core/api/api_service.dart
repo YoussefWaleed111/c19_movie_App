@@ -32,4 +32,9 @@ abstract class ApiService {
   Future<MoviesResponseModel> getMovieSuggestions(
     @Query('movie_id') int movieId,
   );
+
+  @GET('list_movies.json')
+  Future<MoviesResponseModel> searchMovies(
+    @Query('query_term') String query,
+  );
 }

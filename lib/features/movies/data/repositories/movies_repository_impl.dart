@@ -94,6 +94,27 @@ class MoviesRepositoryImpl implements MoviesRepository {
     }
   }
 
+  @override
+  Future<List<MovieEntity>> searchMovies(String query) async {
+    try {
+      final models = await remoteDataSource.searchMovies(query);
+      return models.map((m) => m.toEntity()).toList();
+    } on DioException catch (e) {
+      print('🔴 [MoviesRepository] DioException in searchMovies("$query"):');
+      print('   ➜ URI: ${e.requestOptions.uri}');
+      print('   ➜ Type: ${e.type}');
+      print('   ➜ Status Code: ${e.response?.statusCode}');
+      print('   ➜ Response Body: ${e.response?.data}');
+      print('   ➜ Error: ${e.error}');
+      print('   ➜ Message: ${e.message}');
+      throw _handleDioException(e);
+    } catch (e, stackTrace) {
+      print('🔴 [MoviesRepository] Unexpected error in searchMovies("$query"): $e');
+      print('   ➜ StackTrace: $stackTrace');
+      throw Exception(e.toString());
+    }
+  }
+
   String _handleDioException(DioException e) {
     if (e.type == DioExceptionType.connectionTimeout ||
         e.type == DioExceptionType.receiveTimeout ||

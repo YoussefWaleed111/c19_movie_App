@@ -17,4 +17,6 @@ abstract class AppAssets {
 
   static const String availableNowText = 'assets/images/available_now.png';
   static const String watchNowText = 'assets/images/watch_now.png';
+
+  static const String emptySearch = 'assets/images/empty.png';
 }
