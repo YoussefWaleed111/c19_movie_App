@@ -20,6 +20,7 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
   }) : super(MovieDetailsLoading()) {
     on<FetchMovieDetailsEvent>(_onFetchMovieDetails);
     on<ToggleFavoriteEvent>(_onToggleFavorite);
+    on<AddToHistoryEvent>(_onAddToHistory);
   }
 
   String get _currentUserId =>
@@ -72,5 +73,14 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
         emit(currentState.copyWith(isFavorite: !newStatus));
       }
     }
+  }
+
+  Future<void> _onAddToHistory(
+    AddToHistoryEvent event,
+    Emitter<MovieDetailsState> emit,
+  ) async {
+    try {
+      await favoritesRepository.addToHistory(_currentUserId, event.movie);
+    } catch (_) {}
   }
 }

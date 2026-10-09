@@ -21,4 +21,9 @@ class FavoritesRepositoryImpl implements FavoritesRepository {
   Future<bool> isFavorite(String userId, int movieId) {
     return remoteDataSource.isFavorite(userId, movieId);
   }
+
+  @override
+  Future<void> addToHistory(String userId, MovieDetailsEntity movie) {
+    return remoteDataSource.addToHistory(userId, movie);
+  }
 }

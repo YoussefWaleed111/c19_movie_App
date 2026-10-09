@@ -13,3 +13,9 @@ class ToggleFavoriteEvent extends MovieDetailsEvent {
 
   ToggleFavoriteEvent(this.movie);
 }
+
+class AddToHistoryEvent extends MovieDetailsEvent {
+  final MovieDetailsEntity movie;
+
+  AddToHistoryEvent(this.movie);
+}

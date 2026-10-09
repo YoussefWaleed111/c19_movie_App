@@ -12,6 +12,8 @@ import '../../../browse/presentation/bloc/browse_bloc.dart';
 import '../../../browse/presentation/views/browse_view.dart';
 import '../../../movies/presentation/bloc/home_movies_bloc.dart';
 import '../../../movies/presentation/bloc/home_movies_event.dart';
+import '../../../profile/presentation/bloc/profile_bloc.dart';
+import '../../../profile/presentation/views/profile_view.dart';
 import '../../../search/presentation/bloc/search_bloc.dart';
 import '../../../search/presentation/views/search_view.dart';
 import 'home_view.dart';
@@ -64,6 +66,9 @@ class MainLayoutView extends StatelessWidget {
         BlocProvider<BrowseBloc>(
           create: (_) => BrowseView.createBrowseBloc(),
         ),
+        BlocProvider<ProfileBloc>(
+          create: (_) => ProfileView.createProfileBloc(),
+        ),
       ],
       child: const _MainLayoutScaffold(),
     );
@@ -84,7 +89,7 @@ class _MainLayoutScaffoldState extends State<_MainLayoutScaffold> {
     HomeView(),
     SearchView(),
     BrowseView(),
-    _PlaceholderView(title: 'Profile'),
+    ProfileView(),
   ];
 
   @override
@@ -168,41 +173,6 @@ class _MainLayoutScaffoldState extends State<_MainLayoutScaffold> {
           isSelected ? icon : unselectedIcon,
           color: isSelected ? AppColors.primary : Colors.white,
           size: 26.sp,
-        ),
-      ),
-    );
-  }
-}
-
-class _PlaceholderView extends StatelessWidget {
-  final String title;
-
-  const _PlaceholderView({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF121312),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF121312),
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          title,
-          style: TextStyle(
-            color: AppColors.primary,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: Center(
-        child: Text(
-          '$title Screen Coming Soon',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16.sp,
-          ),
         ),
       ),
     );

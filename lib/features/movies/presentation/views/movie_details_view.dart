@@ -234,7 +234,14 @@ class MovieDetailsView extends StatelessWidget {
                   height: 52.h,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      // Trigger Watch Action
+                      context.read<MovieDetailsBloc>().add(AddToHistoryEvent(movie));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('${movie.title} added to watch history!'),
+                          backgroundColor: Colors.green,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFE50914),
